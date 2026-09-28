@@ -1,34 +1,34 @@
 # standard_perceptron
 
-Standard perceptron реалізує тренування багатошарового перцептрона зі стохастичним градієнтним спуском використовуючи переважно стандартні бібліотеки Python (окрім обробки датасету для загрузки якого було використано PIL та numpy)
+Standard perceptron implements the training of a multilayer perceptron with stochastic gradient descent using mostly standard Python libraries (except for dataset processing, for the loading PIL and numpy were used)
 
-Матричні множення, активаційні функції та бекпропагейшн написані на чистих списках Python
+Matrix multiplications, activation functions and backpropagation are written in pure Python lists
 
-Сам проєкт є навчальним і реалізує саму математику без апаратних прискорень виконуючись на одному ядрі, отже його швидкість за замірами близько в 2500 разів менша за ідентичну нейромережу натреновану на ідентичному датасеті використовуючи PyTorch та відеокарту RTX 5060
+The project itself is educational and implements the math itself without hardware acceleration running on a single core, therefore its speed according to measurements is about 2500 times lower than an identical neural network trained on an identical dataset using PyTorch and an RTX 5060 video card
 
-# Особливості
+# Features
 
-- Математика зворотнього поширення помилки реалізована без сторонніх бібліотек
-- Модульна архітектура, модель створюється подібно до бібліотеки Keras (Приклад - Sequential([Dense(size=128, input_size=784, activation_function='relu'),)
-- Логування з виводом точност після кожної епохи
-- Динамічна зміна темпу навчання
-- Випадкова перетасовка датасету для запобіганнч заучуванню
-- Оптимізатор SGD
-- Функція активації ReLU та Softmax
+- Backpropagation math is implemented without third-party libraries
+- Modular architecture, the model is created similarly to the Keras library (Example - Sequential([Dense(size=128, input_size=784, activation_function='relu'),)
+- Logging with accuracy output after each epoch
+- Dynamic learning rate change
+- Random dataset shuffling to prevent memorization
+- SGD optimizer
+- ReLU and Softmax activation functions
 
-# підготовка
+# preparation
 
-Для обробки датасету було використано дві бібліотеки
+Two libraries were used to process the dataset
 pip install numpy Pillow
 
-## загрузка датасету
+## dataset loading
 
 ```text
 project_root/
 │
 ├── mnist/
-│   ├── 0/ (зображення нулів)
-│   ├── 1/ (зображення одиниць)
+│   ├── 0/ (images of zeros)
+│   ├── 1/ (images of ones)
 │   └── ...
 ├── standard_perceptron.py
 ├── train.py
@@ -36,21 +36,21 @@ project_root/
 ├── losses.py
 ```
 
-Назви зображень не грають ролі але повинні мати розширення .png або .jpg
+The names of the images do not matter but must have the .png or .jpg extension
 
-## запуск
+## launch
 
 python train.py
 
-# архітектура нейромережі
+# neural network architecture
 
-Вхідний шар - Вектор розміром 784 (flattened зобрадення 28х28 пікселів)
-Прихований шар - Dense(size=128, activation='relu')
-Вихідний шар - Dense(size=10, activation='softmax')
+Input layer - Vector of size 784 (flattened 28x28 pixel image)
+Hidden layer - Dense(size=128, activation='relu')
+Output layer - Dense(size=10, activation='softmax')
 
-# результати
+# results
 
-Результати тренування на 20 епохах на 1000 зображеннях (10 на клас)
+Training results on 20 epochs on 1000 images (10 per class)
 
 ```text
 Layer 0, params: 100480, activation: relu
@@ -83,4 +83,4 @@ Epoch № 18 Accuracy: 0.876 Learning rate: 0.0005
 Epoch № 19 Accuracy: 0.88 Learning rate: 0.0005
 ```
 
-Було досягнуто точність в 88% за 20 епох
+An accuracy of 88% was achieved in 20 epochs
